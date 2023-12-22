@@ -1,0 +1,29 @@
+
+
+input{
+    width:100%;
+    box-shadow: 2px 2px 2px slategray;
+    background-color:transparent;
+    height: 20px;
+}
+ul>li{
+    display: inline-block;
+    padding-left: 5%;
+    margin-right:20% ;
+} 
+#head-section{
+    background-color:chocolate;
+    padding: 10px;
+    font-size: 20px;
+    height: 60px;
+}
+#login-section,#register-section,#accountcreate-section,#yourcontacts-section{
+    height: 100vh;
+    padding:20px;
+}
+#login-btn,#signup-btn,#account{
+    width:80px;
+    height:40px;
+    padding: 5px;
+    background-color: coral;
+}

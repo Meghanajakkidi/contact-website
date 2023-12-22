@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACTS</title>
+    <link rel="stylesheet" href="contactwebsite.css">
+</head>
+
+<body>
+    <script src="contactwebsite.js"></script>
+    <header id="head-section">
+        <ul>
+            <li><a style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">CMS</a></li>
+            <li><a href="#">REGISTER</a></li>
+            <li><a href="#">LOGIN</a></li>
+        </ul>
+    </header>
+    <div id="login-section">
+        <h1>login</h1>
+        <form>
+            <label>Email</label>
+            <input type="text" value="" placeholder="enter your email" id="l-email" /><br><br>
+            <label>password</label>
+            <input type="password" value="" placeholder="enter your password" id="l-password" /><br><br>
+            <button id="login-btn" onclick="login(event)">Login</button>
+            <p>Don't have account please <a href="#" onclick="goToSignup()">register</a> here</p>
+        </form>
+    </div>
+    <div id="register-section">
+        <h1>REGISTER HERE</h1>
+        <form>
+            <label>FIRST NAME:</label>
+            <input type="text" value="" placeholder="first name" id="s-firstname" required><br><br>
+            <label>LAST NAME:</label>
+            <input type="text" value="" placeholder="last name" id="s-lastname" required><br><br>
+            <label>Email</label>
+            <input type="text" value="" placeholder="enter your email" id="s-email" required><br><br>
+            <label>PASSWORD:</label>
+            <input type="password" value="" placeholder="enter your password" id="s-password" required><br><br>
+            <label>CONFIRMPASSWORD:</label>
+            <input type="password" value="" placeholder="enter your password" id="s-confirmpassword" required><br><br>
+            <button id="signup-btn" onclick="signup(event)">SUMBIT</button>
+            <p>Alredy an account please <a href="#" onclick="gotoaccount()">Login</a> here</p>
+        </form>
+    </div>
+    <div id="accountcreate-section">
+        <h1>CREATE YOUR CONTACT</h1>
+        <form>
+            <label>FIRST NAME:</label>
+            <input type="text" value="" placeholder="first name" id="s-firstname" required><br><br>
+            <label>LAST NAME:</label>
+            <input type="text" value="" placeholder="last name" id="s-lastname" required><br><br>
+            <label>Email</label>
+            <input type="text" value="" placeholder="enter your email" id="s-email" required><br><br>
+            <label>ADDRESS:</label>
+            <input type="text" value="" placeholder="enter your address" id="s-address" required><br><br>
+            <label>CONTACT no:</label>
+            <input type="number" value="" placeholder="enter your number" id="s-contact no" required><br><br>
+            <button id="account" onclick="account(event)">ADD CONTACT</button>
+            <p>Alredy an account please <a href="#" onclick="goToLogin()">login</a> here</p>
+        </form>
+    </div>
+    </div>
+    <script>
+        let registerDiv = document.getElementById("register-section")
+        let loginDiv = document.getElementById("login-section")
+        let accountDiv = document.getElementById("accountcreate-section")
+        loginDiv.style.display = "none"
+        accountDiv.style.display = "none"
+
+       function goToSignup() {
+            registerDiv.style.display = "block"
+            loginDiv.style.display = "none"
+           accountDiv.style.display = "none"
+ }
+        function goToLogin() {
+            loginDiv.style.display = "block"
+            registerDiv.style.display = "none"
+           accountDiv.style.display = "none"
+
+        }
+        function gotoaccount() {
+            loginDiv.style.display = "none"
+            registerDiv.style.display = "none"
+            accountDiv.style.display = "block"
+        }
+          async function signup(e) {
+            e.preventDefault();
+            let email = document.getElementById("s-email").value;
+            let firstname = document.getElementById("s-firstname").value;
+            let lastname = document.getElementById("s-lastname").value;
+            let password = document.getElementById("s-password").value;
+            let confirmpassword = document.getElementById("s-confirmpassword").value;
+            console.log(email, firstname, lastname, password, confirmpassword)
+            await localStorage.setItem(email, firstname, lastname, password, confirmpassword)
+            goToLogin();
+         }
+         async function login(event) {
+            event.preventDefault()
+            let email = document.getElementById("l-email").value
+            let password = document.getElementById("l-password").value
+            let user = await localStorage.getItem(email)
+            if (!user) {
+                alert("user not found")
+            } else {
+                if (user === password) {
+                    alert("login success")
+                    localStorage.setItem("loggedInUser", email)
+                    gotoaccount()
+                } else {
+                    alert("invalid credentials")
+                }
+            }
+          }
+        async function account(e) {
+            e.preventDefault();
+            let email = document.getElementById("s-email").value;
+            let firstname = document.getElementById("s-firstname").value;
+            let lastname = document.getElementById("s-lastname").value;
+            let address = document.getElementById("s-address").value;
+            let contactno = document.getElementById("s-contact no").value;
+           console.log(email, firstname, lastname, address, contactno)
+           await localStorage.setItem(email, firstname, lastname, password, confirmpassword)
+          window. alert("contacts added")
+         }
+
+
+ </script>
+</body>
+</html>
